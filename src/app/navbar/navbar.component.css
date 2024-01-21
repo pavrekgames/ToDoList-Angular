@@ -1,0 +1,26 @@
+.navbar-bgr{
+  background-color: #3f37c9;
+  height: 70px;
+  width: 100%;
+}
+
+.navbar-logo{
+  margin-top: 10px;
+  margin-left: 40%;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+  display: inline-block;
+}
+
+.logo-to-word{
+color: #f26a8d;
+}
+
+.logo-do-word{
+color: yellow;
+}
+
+.logo-list-word{
+color: #7ae582;
+}
