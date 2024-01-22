@@ -6,9 +6,9 @@
   </span>
 
 
-  <button type="button" class="btn btn-success" style="margin-left: 60px; margin-bottom: 7px;">Nowe zadanie</button>
-
-
+  <button type="button" [ngClass]="isAddingTask ? 'btn btn-danger' : 'btn btn-success'"
+  style="margin-left: 60px; margin-bottom: 7px;" (click)="changeAddingTaskState()">{{currentButtonText}}
+  </button>
 
 </div>
 

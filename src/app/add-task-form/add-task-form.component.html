@@ -1,7 +1,7 @@
 
 
 
-<div class="cantainer-lg text-white bg-dark bg-gradient border border-3 border-success">
+<div class="cantainer-lg text-white bg-dark bg-gradient border border-3 border-success" *ngIf="isAddingTask">
 
   <div class="p-4 text-white text-center">
     <h3>Dodaj nowe zadanie</h3>
@@ -34,7 +34,9 @@
       </div>
 
       <div class="text-center m-4">
-        <input type="submit" class="btn btn-info" value="Dodaj zadanie">
+        <!-- <input type="submit" class="btn btn-info" value="Dodaj zadanie" (click)="changeAddingTaskState()"> -->
+
+        <button class="btn btn-info">Dodaj zadanie</button>
       </div>
 
 
