@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AddTaskFormComponent {
 
+taskName: string = "";
+taskDesc: string = "";
+priority: number = 0;
+timeCount: number = 0;
+deadlineDate: Date = new Date();
+
 }
