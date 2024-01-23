@@ -46,9 +46,43 @@ export class AddTaskFormComponent {
     }
 
     console.log('Changed ' + this.priorityLevel);
-    console.log("Select option: " + this.currentTimeOption);
+    console.log('Select option: ' + this.currentTimeOption);
   }
 
+  addHoursToDate(): Date {
+    this.deadlineDate.setTime(
+      this.newTask.addTaskDate.getTime() + this.timeCount * 60 * 60 * 1000
+    );
+
+    return this.deadlineDate;
+  }
+
+  addDaysToDate(): Date {
+    this.deadlineDate.setTime(
+      this.newTask.addTaskDate.getTime() + this.timeCount * 60 * 60 * 1000 * 24
+    );
+
+    return this.deadlineDate;
+  }
+
+  addWeeksToDate(): Date {
+    this.deadlineDate.setTime(
+      this.newTask.addTaskDate.getTime() +
+        this.timeCount * 60 * 60 * 1000 * 24 * 7
+    );
+
+    return this.deadlineDate;
+  }
+
+  addMonthsToDate(): Date {
+    this.deadlineDate = new Date(
+      this.deadlineDate.setMonth(
+        this.newTask.addTaskDate.getMonth() + this.timeCount
+      )
+    );
+
+    return this.deadlineDate;
+  }
 
   addNewTask() {
     this.tasksService.addTask(this.newTask);
