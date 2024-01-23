@@ -10,15 +10,15 @@
   <div class="row justify-content-center my-2">
     <div class="col-lg-5">
       <label for="task-title" class="form-label m-2">Tytuł zadania:</label>
-      <input type="text" class="form-control bs-success" id="task-title" placeholder="Zadanie 1" name="task-title" [value]="taskName">
+      <input type="text" class="form-control bs-success" id="task-title" placeholder="Zadanie 1" name="task-title" [value]="newTask.taskName">
       <label for="task-desc" class="form-label m-2">Opis zadania:</label>
-      <textarea class="form-control" id="task-desc" rows="3" [value]="taskDesc"></textarea>
+      <textarea class="form-control" id="task-desc" rows="3" [value]="newTask.taskDescription"></textarea>
 
       <div class="m-2">
         <label for="priority" class="form-label">Priorytet:</label>
-        <input type="radio" class="form-check-input m-2" id="lowPriority" name="priority" value="niski">Niski
-        <input type="radio" class="form-check-input m-2" id="mediumPriority" name="priority" value="sredni">Średni
-        <input type="radio" class="form-check-input m-2" id="hightPriority" name="priority" value="wysoki" checked>Wysoki
+        <input type="radio" class="form-check-input m-2" id="lowPriority" name="priority" value="1" (change)="setPriorityLevel($event)">Niski
+        <input type="radio" class="form-check-input m-2" id="mediumPriority" name="priority" value="2" (change)="setPriorityLevel($event)">Średni
+        <input type="radio" class="form-check-input m-2" id="hightPriority" name="priority" value="3" (change)="setPriorityLevel($event)" checked>Wysoki
       </div>
 
       <div class="">
