@@ -20,8 +20,10 @@ export class AddTaskFormComponent {
   };
 
   priorityLevel: Number = 1;
-
   timeCount: number = 0;
+  timeOptions: Array<string> = ['godziny', 'dni', 'tygodnie', 'miesiące'];
+  currentTimeOption: string = 'godziny';
+
   deadlineDate: Date = new Date();
 
   constructor(private tasksService: TasksService) {}
@@ -44,7 +46,9 @@ export class AddTaskFormComponent {
     }
 
     console.log('Changed ' + this.priorityLevel);
+    console.log("Select option: " + this.currentTimeOption);
   }
+
 
   addNewTask() {
     this.tasksService.addTask(this.newTask);
