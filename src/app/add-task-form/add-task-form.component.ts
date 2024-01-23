@@ -58,6 +58,23 @@ export class AddTaskFormComponent {
     console.log('Select option: ' + this.currentTimeOption);
   }
 
+  setTimeCount() {
+    switch (this.currentTimeOption) {
+      case 'godziny':
+        this.deadlineDate = this.addDaysToDate();
+        break;
+      case 'dni':
+        this.deadlineDate = this.addDaysToDate();
+        break;
+      case 'tygodnie':
+        this.deadlineDate = this.addWeeksToDate();
+        break;
+      case 'miesiące':
+        this.deadlineDate = this.addMonthsToDate();
+        break;
+    }
+  }
+
   addHoursToDate(): Date {
     this.deadlineDate.setTime(
       this.newTask.addTaskDate.getTime() + this.timeCount * 60 * 60 * 1000
@@ -94,12 +111,19 @@ export class AddTaskFormComponent {
   }
 
   onSubmit() {
-
-    this.isFormValid = this.newTask.taskName.trim().length > 0 && this.timeCount > 0;
+    this.isFormValid =
+      this.newTask.taskName.trim().length > 0 && this.timeCount > 0;
 
     if (this.isFormValid) {
       console.log('Submitted');
+      this.setTask();
     }
+  }
+
+  setTask() {
+    this.newTask.addTaskDate = new Date();
+    this.setTimeCount();
+    this.addNewTask();
   }
 
   addNewTask() {

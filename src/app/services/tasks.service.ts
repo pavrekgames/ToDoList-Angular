@@ -9,7 +9,8 @@ export class TasksService {
   private isAddingTask: boolean = false;
   private addingTaskState = new Subject<boolean>();
 
-  tasks: Array<Task> = new Array();
+  private tasks: Array<Task> = new Array();
+  private tasksObs = new Subject<Array<Task>>();
 
   constructor() {}
 
@@ -27,8 +28,14 @@ export class TasksService {
     return this.addingTaskState.asObservable();
   }
 
+  getTasks(): Observable<Array<Task>> {
+    return this.tasksObs.asObservable();
+  }
+
   addTask(task: Task) {
     this.tasks.push(task);
+    this.changeAddingTaskState();
+    this.tasksObs.next(this.tasks);
   }
 
   removeTask(task: Task) {
