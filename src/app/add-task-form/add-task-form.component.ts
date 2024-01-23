@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TasksService } from '../services/tasks.service';
 import { Console } from 'console';
 import { TaskPriorityLevel, Task } from '../models/task';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-task-form',
@@ -20,18 +21,26 @@ export class AddTaskFormComponent {
   };
 
   priorityLevel: Number = 1;
-  timeCount: number = 0;
+  timeCount: number = 1;
   timeOptions: Array<string> = ['godziny', 'dni', 'tygodnie', 'miesiące'];
   currentTimeOption: string = 'godziny';
 
   deadlineDate: Date = new Date();
 
-  constructor(private tasksService: TasksService) {}
+  isFormValid: boolean =
+    this.newTask.taskName.trim().length > 0 && this.timeCount > 0;
+
+  constructor(
+    private tasksService: TasksService,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.tasksService.getAddingTaskState().subscribe((data) => {
       this.isAddingTask = data;
     });
+
+    this.newTask.taskName = '';
   }
 
   setPriorityLevel(value: any) {
@@ -82,6 +91,15 @@ export class AddTaskFormComponent {
     );
 
     return this.deadlineDate;
+  }
+
+  onSubmit() {
+
+    this.isFormValid = this.newTask.taskName.trim().length > 0 && this.timeCount > 0;
+
+    if (this.isFormValid) {
+      console.log('Submitted');
+    }
   }
 
   addNewTask() {

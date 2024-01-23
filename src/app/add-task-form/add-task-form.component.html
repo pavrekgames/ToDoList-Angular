@@ -9,32 +9,37 @@
 
   <div class="row justify-content-center my-2">
     <div class="col-lg-5">
-      <label for="task-title" class="form-label m-2">Tytuł zadania:</label>
-      <input type="text" class="form-control bs-success" id="task-title" placeholder="Zadanie 1" name="task-title" [(ngModel)]="newTask.taskName">
-      <label for="task-desc" class="form-label m-2">Opis zadania:</label>
-      <textarea class="form-control" id="task-desc" rows="3" [(ngModel)]="newTask.taskDescription"></textarea>
 
-      <div class="m-2">
-        <label for="priority" class="form-label">Priorytet:</label>
-        <input type="radio" class="form-check-input m-2" id="lowPriority" name="priority" value="1" (change)="setPriorityLevel($event)">Niski
-        <input type="radio" class="form-check-input m-2" id="mediumPriority" name="priority" value="2" (change)="setPriorityLevel($event)">Średni
-        <input type="radio" class="form-check-input m-2" id="hightPriority" name="priority" value="3" (change)="setPriorityLevel($event)" checked>Wysoki
-      </div>
+        <label for="task-title" class="form-label m-2">Tytuł zadania:</label>
+        <input type="text" class="form-control" id="task-title" placeholder="Zadanie 1" name="task-title" [(ngModel)]="newTask.taskName" > <!--[ngModelOptions]="{standalone: true}"-->
+        <span *ngIf="newTask.taskName.trim().length == 0"
+        class="form-check text-danger">Zadanie musi posiadać tytuł</span>
 
-      <div class="">
-        <label for="task-deadline" class="form-label m-2">Czas trwania:</label>
-        <input type="text" class="col-lg-1 m-2" id="task-deadline" placeholder="1" name="task-deadline" [(ngModel)]="timeCount">
+        <label for="task-desc" class="form-label m-2">Opis zadania:</label>
+        <textarea class="form-control" id="task-desc" rows="3" [(ngModel)]="newTask.taskDescription"></textarea>
 
-          <select class="m-2" id="timeUnity" [(ngModel)]="currentTimeOption">
-            <option *ngFor="let timeOption of timeOptions">{{timeOption}}</option>
-          </select>
-      </div>
+        <div class="m-2">
+          <label for="priority" class="form-label">Priorytet:</label>
+          <input type="radio" class="form-check-input m-2" id="lowPriority" name="priority" value="1" (change)="setPriorityLevel($event)">Niski
+          <input type="radio" class="form-check-input m-2" id="mediumPriority" name="priority" value="2" (change)="setPriorityLevel($event)">Średni
+          <input type="radio" class="form-check-input m-2" id="hightPriority" name="priority" value="3" (change)="setPriorityLevel($event)" checked>Wysoki
+        </div>
 
-      <div class="text-center m-4">
-        <!-- <input type="submit" class="btn btn-info" value="Dodaj zadanie" (click)="changeAddingTaskState()"> -->
+        <div class="">
+          <label for="task-deadline" class="form-label m-2">Czas trwania:</label>
+          <input type="number" class="col-lg-1 m-2" id="task-deadline" placeholder="1" name="task-deadline" [(ngModel)]="timeCount">
 
-        <button class="btn btn-info">Dodaj zadanie</button>
-      </div>
+            <select class="m-2" id="timeUnity" [(ngModel)]="currentTimeOption">
+              <option *ngFor="let timeOption of timeOptions">{{timeOption}}</option>
+            </select>
+        </div>
+
+        <span *ngIf="timeCount <= 0"
+         class="form-check text-danger">Czas nie może być pusty i musi być liczbą większą niż zero</span>
+
+        <div class="text-center m-4">
+          <button type="button" class="btn btn-info" (click)="onSubmit()">Dodaj zadanie</button>
+        </div>
 
 
     </div>
