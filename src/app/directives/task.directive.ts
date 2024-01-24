@@ -32,19 +32,6 @@ export class TaskDirective {
     this.deadlineDateP = renderer.createElement('p');
   }
 
-  @HostListener('click') showTaskDetails(){
-    if (!this.isShowingDetails) {
-      this.descriptionP.innerHTML = this.task.taskDescription;
-      this.startDateP.innerHTML = this.task.addTaskDate;
-      this.deadlineDateP.innerHTML = this.task.deadlineDate;
-
-      this.renderer.appendChild(this.el.nativeElement, this.descriptionP);
-      this.renderer.appendChild(this.el.nativeElement, this.startDateP);
-      this.renderer.appendChild(this.el.nativeElement, this.deadlineDateP);
-
-      this.isShowingDetails = true;
-    }
-}
   showTaskDetails2() {
 
   }

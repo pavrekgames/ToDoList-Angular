@@ -4,30 +4,8 @@
     <div class="col-sm-4 border bg-gradient to-do-color rounded">
           <h1 class="text-center">To-Do</h1>
           <div class="task-element border border-secondary m5 container" appTask *ngFor="let task of tasks">
-            <div class="d-flex">
 
-              <div class="flex-grow-1 m-1 box"><b>{{task.taskName}}</b></div>
-
-              <div class="m-2">
-                <p class="badge bg-primary">{{task.priority}} </p>
-              </div>
-
-              <div class="m-2">
-                <button type="button" class="rounded">
-                  <img src="/assets/down-chevron.png" alt="Options" width="30px" height="30px">
-                </button>
-              </div>
-
-              <div class="m-2">
-                <button type="button" class="rounded">
-                  <img src="/assets/settings.png" alt="Options" width="30px" height="30px">
-                </button>
-
-              </div>
-
-
-            </div>
-
+              <app-task-element [task]="task"></app-task-element>
           </div> <br>
     </div>
  </div>

@@ -1,0 +1,23 @@
+<div class="d-flex">
+
+  <div class="flex-grow-1 m-1 box"><b>{{task.taskName}}</b></div>
+
+  <div class="m-2">
+    <p class="badge bg-primary">{{task.priority}} </p>
+  </div>
+
+  <div class="m-2">
+    <button type="button" class="rounded" (click)="showTasksDetails()">
+      <img src="/assets/down-chevron.png" alt="Options" width="30px" height="30px">
+    </button>
+  </div>
+
+  <div class="m-2">
+    <button type="button" class="rounded">
+      <img src="/assets/settings.png" alt="Options" width="30px" height="30px">
+    </button>
+
+  </div>
+
+
+</div>
