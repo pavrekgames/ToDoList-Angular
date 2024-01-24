@@ -2,7 +2,7 @@ export interface Task{
 
   taskName: string;
   taskDescription: string;
-  priority: TaskPriorityLevel;
+  priority: string;
   addTaskDate: Date;
   deadlineDate: Date;
 

@@ -3,6 +3,12 @@
  <div class="row justify-content-md-start">
     <div class="col-sm-4 h-50 d-inline-block border bg-gradient to-do-color">
           <h1 class="text-center">To-Do</h1>
+          <div *ngFor="let task of tasks">
+              {{task.taskName}} <br>
+              {{task.priority}} <br>
+              {{task.addTaskDate.toLocaleString()}} <br>
+              {{task.deadlineDate.toLocaleString()}}
+          </div>
     </div>
  </div>
 </div>

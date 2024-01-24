@@ -15,7 +15,7 @@ export class AddTaskFormComponent {
   newTask: Task = {
     taskName: '',
     taskDescription: '',
-    priority: TaskPriorityLevel.High,
+    priority: 'Wysoki',
     addTaskDate: new Date(),
     deadlineDate: new Date(),
   };
@@ -47,11 +47,11 @@ export class AddTaskFormComponent {
     this.priorityLevel = value.target.value;
 
     if (this.priorityLevel == 1) {
-      this.newTask.priority = TaskPriorityLevel.Low;
+      this.newTask.priority = 'Niski';
     } else if (this.priorityLevel == 2) {
-      this.newTask.priority = TaskPriorityLevel.Medium;
+      this.newTask.priority = 'Średni';
     } else {
-      this.newTask.priority = TaskPriorityLevel.High;
+      this.newTask.priority = 'Wysoki';
     }
 
     console.log('Changed ' + this.priorityLevel);
@@ -61,16 +61,16 @@ export class AddTaskFormComponent {
   setTimeCount() {
     switch (this.currentTimeOption) {
       case 'godziny':
-        this.deadlineDate = this.addDaysToDate();
+        this.newTask.deadlineDate = this.addHoursToDate();
         break;
       case 'dni':
-        this.deadlineDate = this.addDaysToDate();
+        this.newTask.deadlineDate = this.addDaysToDate();
         break;
       case 'tygodnie':
-        this.deadlineDate = this.addWeeksToDate();
+        this.newTask.deadlineDate = this.addWeeksToDate();
         break;
       case 'miesiące':
-        this.deadlineDate = this.addMonthsToDate();
+        this.newTask.deadlineDate = this.addMonthsToDate();
         break;
     }
   }
