@@ -7,13 +7,15 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToDoContainerComponent } from './to-do-container/to-do-container.component';
+import { TaskDirective } from './directives/task.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     AddTaskFormComponent,
-    ToDoContainerComponent
+    ToDoContainerComponent,
+    TaskDirective
   ],
   imports: [
     BrowserModule,
