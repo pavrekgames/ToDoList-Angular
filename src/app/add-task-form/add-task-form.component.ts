@@ -112,7 +112,7 @@ export class AddTaskFormComponent {
 
   onSubmit() {
     this.isFormValid =
-      this.newTask.taskName.trim().length > 0 && this.timeCount > 0;
+      this.newTask.taskName.trim().length > 0 && this.newTask.taskName.trim().length <= 90 && this.timeCount > 0;
 
     if (this.isFormValid) {
       console.log('Submitted');
