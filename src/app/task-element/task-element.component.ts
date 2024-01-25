@@ -1,6 +1,7 @@
 import { Component, Input, ElementRef, Renderer2 } from '@angular/core';
 import { Task } from '../models/task';
 import { TaskDirective } from '../directives/task.directive';
+import { TasksService } from '../services/tasks.service';
 
 @Component({
   selector: 'app-task-element',
@@ -11,7 +12,10 @@ export class TaskElementComponent {
   isDetailsHidden: boolean = true;
   isSettingsHidden: boolean = true;
 
-  constructor(private taskDirective: TaskDirective) {}
+  constructor(
+    private taskDirective: TaskDirective,
+    private tasksService: TasksService
+  ) {}
 
   ngOnInit(): void {
     this.taskDirective.getIsDetailsHidden().subscribe((data) => {
@@ -37,13 +41,17 @@ export class TaskElementComponent {
     }
   }
 
-  tasksSettings(){
+  tasksSettings() {
     if (this.isSettingsHidden) {
       this.isSettingsHidden = false;
     } else {
       this.isSettingsHidden = true;
     }
+  }
 
-    console.log("Tasks Settings");
+  removeTask() {
+    this.tasksService.removeTask(this.task);
+
+    console.log("Remove Task");
   }
 }

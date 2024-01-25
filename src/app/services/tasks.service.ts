@@ -40,5 +40,6 @@ export class TasksService {
 
   removeTask(task: Task) {
     this.tasks = this.tasks.filter((e) => e !== task);
+    this.tasksObs.next(this.tasks);
   }
 }
