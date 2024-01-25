@@ -33,7 +33,7 @@ export class TasksService {
   }
 
   addTask(task: Task) {
-    this.tasks.push(task);
+    this.tasks.push(Object.assign({}, task));
     this.changeAddingTaskState();
     this.tasksObs.next(this.tasks);
   }
