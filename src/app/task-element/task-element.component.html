@@ -7,7 +7,7 @@
   </div>
 
   <div class="m-2">
-    <button type="button" class="rounded" (click)="showTasksDetails()">
+    <button type="button" class="rounded" (click)="tasksDetails()">
       <img src="/assets/down-chevron.png" alt="Options" width="30px" height="30px">
     </button>
   </div>
@@ -19,5 +19,21 @@
 
   </div>
 
+
+</div>
+
+<div class="container" [hidden]="isDetailsHidden">
+
+  <div class="box border m-1">
+    {{task.taskDescription}}
+  </div>
+
+  <div class="text-success m-1">
+    <b> Data dodania: {{task.addTaskDate.toLocaleString()}}</b>
+  </div>
+
+  <div class="text-danger m-1">
+    <b> Deadline: {{task.deadlineDate.toLocaleString()}}</b>
+  </div>
 
 </div>

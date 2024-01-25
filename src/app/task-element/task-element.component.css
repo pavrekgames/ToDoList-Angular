@@ -1,0 +1,4 @@
+.box {
+  inline-size: 550px;
+  overflow-wrap: break-word;
+}
