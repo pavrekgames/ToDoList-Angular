@@ -1,14 +1,30 @@
 
-<div class="cantainer m-5" *ngIf="tasks.length > 0">
+<div class="cantainer m-4" *ngIf="tasks.length > 0">
  <div class="row">
-    <div class="col-sm-4 border bg-gradient to-do-color rounded">
+    <div class="col-4 border bg-gradient to-do-color rounded ">
           <h1 class="text-center">To-Do</h1>
           <div class="task-element border border-secondary m5 container" appTask *ngFor="let task of tasks">
 
               <app-task-element [task]="task"></app-task-element>
           </div> <br>
     </div>
+
+    <div class="col-4 border bg-gradient in-progress-color rounded ">
+          <h1 class="text-center">In Progress</h1>
+          <div class="task-element border border-secondary m5 container">
+
+          </div> <br>
+    </div>
+
+    <div class="col-4 border bg-gradient done-color rounded ">
+      <h1 class="text-center">Done</h1>
+      <div class="task-element border border-secondary m5 container">
+
+      </div> <br>
+</div>
+
  </div>
 </div>
+
 
 

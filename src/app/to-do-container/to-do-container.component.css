@@ -3,6 +3,14 @@
   background-color: #f26a8d;
 }
 
+.in-progress-color{
+  background-color: #fcf6bd;
+  }
+
+.done-color{
+  background-color: #7ae582;
+  }
+
 .task-element{
   background-color: #edf2f4;
 
