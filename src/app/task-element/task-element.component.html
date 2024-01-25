@@ -13,12 +13,26 @@
   </div>
 
   <div class="m-2">
-    <button type="button" class="rounded">
+    <button type="button" class="rounded" (click)="tasksSettings()">
       <img src="/assets/settings.png" alt="Options" width="30px" height="30px">
     </button>
 
   </div>
 
+</div>
+
+<div class="container" [hidden]="isSettingsHidden">
+
+  <div class="m-2 d-flex flex-row-reverse">
+    <button type="button" class="m-1 btn btn-info rounded" >
+      Edytuj
+    </button>
+
+    <button type="button" class="m-1 btn btn-danger rounded">
+      Usuń
+    </button>
+
+  </div>
 
 </div>
 
