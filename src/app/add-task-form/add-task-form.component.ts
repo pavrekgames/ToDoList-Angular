@@ -13,6 +13,7 @@ export class AddTaskFormComponent {
   isAddingTask: boolean = false;
 
   newTask: Task = {
+    id: 1,
     taskName: '',
     taskDescription: '',
     priority: 'Wysoki',
