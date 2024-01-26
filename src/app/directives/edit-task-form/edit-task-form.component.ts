@@ -18,6 +18,8 @@ export class EditTaskFormComponent {
     taskName: '',
     taskDescription: '',
     priority: 'Wysoki',
+    timeCount: 1,
+    timeUnit: 'godziny',
     addTaskDate: new Date(),
     deadlineDate: new Date(),
   };
@@ -66,8 +68,8 @@ export class EditTaskFormComponent {
     console.log('Select option: ' + this.currentTimeOption);
   }
 
-  setTimeCount() {
-    switch (this.currentTimeOption) {
+  setDeadlineDate() {
+    switch (this.taskToEdit.timeUnit) {
       case 'godziny':
         this.taskToEdit.deadlineDate = this.addHoursToDate();
         break;
@@ -85,7 +87,7 @@ export class EditTaskFormComponent {
 
   addHoursToDate(): Date {
     this.deadlineDate.setTime(
-      this.taskToEdit.addTaskDate.getTime() + this.timeCount * 60 * 60 * 1000
+      this.taskToEdit.addTaskDate.getTime() + this.taskToEdit.timeCount * 60 * 60 * 1000
     );
 
     return this.deadlineDate;
@@ -93,7 +95,7 @@ export class EditTaskFormComponent {
 
   addDaysToDate(): Date {
     this.deadlineDate.setTime(
-      this.taskToEdit.addTaskDate.getTime() + this.timeCount * 60 * 60 * 1000 * 24
+      this.taskToEdit.addTaskDate.getTime() + this.taskToEdit.timeCount * 60 * 60 * 1000 * 24
     );
 
     return this.deadlineDate;
@@ -102,7 +104,7 @@ export class EditTaskFormComponent {
   addWeeksToDate(): Date {
     this.deadlineDate.setTime(
       this.taskToEdit.addTaskDate.getTime() +
-        this.timeCount * 60 * 60 * 1000 * 24 * 7
+      this.taskToEdit.timeCount * 60 * 60 * 1000 * 24 * 7
     );
 
     return this.deadlineDate;
@@ -111,7 +113,7 @@ export class EditTaskFormComponent {
   addMonthsToDate(): Date {
     this.deadlineDate = new Date(
       this.deadlineDate.setMonth(
-        this.taskToEdit.addTaskDate.getMonth() + this.timeCount
+        this.taskToEdit.addTaskDate.getMonth() + this.taskToEdit.timeCount
       )
     );
 
@@ -130,8 +132,10 @@ export class EditTaskFormComponent {
 
   setTask() {
     this.taskToEdit.priority = this.currentPriorityLevel;
+    //this.taskToEdit.timeCount = this.timeCount;
+    //this.taskToEdit.timeUnit = this.currentTimeOption;
     this.taskToEdit.addTaskDate = new Date();
-    this.setTimeCount();
+    this.setDeadlineDate();
     this.editTask();
   }
 

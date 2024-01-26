@@ -19,6 +19,8 @@ export class TasksService {
     taskName: '',
     taskDescription: '',
     priority: '',
+    timeCount: 1,
+    timeUnit: '',
     addTaskDate: new Date(),
     deadlineDate: new Date(),
   };

@@ -17,6 +17,8 @@ export class AddTaskFormComponent {
     taskName: '',
     taskDescription: '',
     priority: 'Wysoki',
+    timeCount: 1,
+    timeUnit: 'godziny',
     addTaskDate: new Date(),
     deadlineDate: new Date(),
   };
@@ -60,8 +62,8 @@ export class AddTaskFormComponent {
     console.log('Select option: ' + this.currentTimeOption);
   }
 
-  setTimeCount() {
-    switch (this.currentTimeOption) {
+  setDeadlineDate() {
+    switch (this.newTask.timeUnit) {
       case 'godziny':
         this.newTask.deadlineDate = this.addHoursToDate();
         break;
@@ -79,7 +81,7 @@ export class AddTaskFormComponent {
 
   addHoursToDate(): Date {
     this.deadlineDate.setTime(
-      this.newTask.addTaskDate.getTime() + this.timeCount * 60 * 60 * 1000
+      this.newTask.addTaskDate.getTime() + this.newTask.timeCount * 60 * 60 * 1000
     );
 
     return this.deadlineDate;
@@ -87,7 +89,7 @@ export class AddTaskFormComponent {
 
   addDaysToDate(): Date {
     this.deadlineDate.setTime(
-      this.newTask.addTaskDate.getTime() + this.timeCount * 60 * 60 * 1000 * 24
+      this.newTask.addTaskDate.getTime() + this.newTask.timeCount * 60 * 60 * 1000 * 24
     );
 
     return this.deadlineDate;
@@ -96,7 +98,7 @@ export class AddTaskFormComponent {
   addWeeksToDate(): Date {
     this.deadlineDate.setTime(
       this.newTask.addTaskDate.getTime() +
-        this.timeCount * 60 * 60 * 1000 * 24 * 7
+      this.newTask.timeCount * 60 * 60 * 1000 * 24 * 7
     );
 
     return this.deadlineDate;
@@ -105,7 +107,7 @@ export class AddTaskFormComponent {
   addMonthsToDate(): Date {
     this.deadlineDate = new Date(
       this.deadlineDate.setMonth(
-        this.newTask.addTaskDate.getMonth() + this.timeCount
+        this.newTask.addTaskDate.getMonth() + this.newTask.timeCount
       )
     );
 
@@ -124,8 +126,10 @@ export class AddTaskFormComponent {
 
   setTask() {
     this.newTask.priority = this.currentPriorityLevel;
+    //this.newTask.timeCount = this.timeCount;
+    //this.newTask.timeUnit = this.currentTimeOption;
     this.newTask.addTaskDate = new Date();
-    this.setTimeCount();
+    this.setDeadlineDate();
     this.addNewTask();
   }
 

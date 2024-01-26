@@ -30,6 +30,8 @@ export class TaskElementComponent {
     taskName: 'Default',
     taskDescription: 'kapa',
     priority: 'Wysoki',
+    timeCount: 1,
+    timeUnit: 'godziny',
     addTaskDate: new Date(),
     deadlineDate: new Date(),
   };

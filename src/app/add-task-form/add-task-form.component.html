@@ -29,14 +29,14 @@
 
         <div class="">
           <label for="task-deadline" class="form-label m-2">Czas trwania:</label>
-          <input type="number" class="col-lg-1 m-2" id="task-deadline" placeholder="1" name="task-deadline" [(ngModel)]="timeCount">
+          <input type="number" class="col-lg-1 m-2" id="task-deadline" placeholder="1" name="task-deadline" [(ngModel)]="newTask.timeCount">
 
-            <select class="m-2" id="timeUnity" [(ngModel)]="currentTimeOption">
+            <select class="m-2" id="timeUnity" [(ngModel)]="newTask.timeUnit">
               <option *ngFor="let timeOption of timeOptions">{{timeOption}}</option>
             </select>
         </div>
 
-        <span *ngIf="timeCount <= 0"
+        <span *ngIf="newTask.timeCount <= 0"
          class="form-check text-danger">Czas nie może być pusty i musi być liczbą większą niż zero</span>
 
         <div class="text-center m-4">
