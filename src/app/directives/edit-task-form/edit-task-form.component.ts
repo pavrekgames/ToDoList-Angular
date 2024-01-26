@@ -22,7 +22,8 @@ export class EditTaskFormComponent {
     deadlineDate: new Date(),
   };
 
-  priorityLevel: Number = 1;
+  priorityLevels: Array<string> = ['Niski', 'Średni', 'Wysoki'];
+  currentPriorityLevel: string = 'Wysoki';
   timeCount: number = 1;
   timeOptions: Array<string> = ['godziny', 'dni', 'tygodnie', 'miesiące'];
   currentTimeOption: string = 'godziny';
@@ -44,23 +45,24 @@ export class EditTaskFormComponent {
 
     this.tasksService.getTaskObs().subscribe((data) => {
       this.taskToEdit = data;
+      this.currentPriorityLevel = this.taskToEdit.priority;
     });
 
     this.taskToEdit.taskName = '';
   }
 
   setPriorityLevel(value: any) {
-    this.priorityLevel = value.target.value;
+    this.currentPriorityLevel = value.target.value;
 
-    if (this.priorityLevel == 1) {
+    if (this.currentPriorityLevel == 'Niski') {
       this.taskToEdit.priority = 'Niski';
-    } else if (this.priorityLevel == 2) {
+    } else if (this.currentPriorityLevel == 'Średni') {
       this.taskToEdit.priority = 'Średni';
     } else {
       this.taskToEdit.priority = 'Wysoki';
     }
 
-    console.log('Changed ' + this.priorityLevel);
+    console.log('Changed ' + this.currentPriorityLevel);
     console.log('Select option: ' + this.currentTimeOption);
   }
 
@@ -127,6 +129,7 @@ export class EditTaskFormComponent {
   }
 
   setTask() {
+    this.taskToEdit.priority = this.currentPriorityLevel;
     this.taskToEdit.addTaskDate = new Date();
     this.setTimeCount();
     this.editTask();

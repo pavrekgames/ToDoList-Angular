@@ -22,9 +22,9 @@
 
         <div class="m-2">
           <label for="priority" class="form-label">Priorytet:</label>
-          <input type="radio" class="form-check-input m-2" id="lowPriority" name="priority" value="1" (change)="setPriorityLevel($event)">Niski
-          <input type="radio" class="form-check-input m-2" id="mediumPriority" name="priority" value="2" (change)="setPriorityLevel($event)">Średni
-          <input type="radio" class="form-check-input m-2" id="hightPriority" name="priority" value="3" (change)="setPriorityLevel($event)" checked>Wysoki
+          <input type="radio" class="form-check-input m-2" id="lowPriority" name="priority" [value]="priorityLevels[0]" [(ngModel)]="currentPriorityLevel">Niski
+          <input type="radio" class="form-check-input m-2" id="mediumPriority" name="priority" [value]="priorityLevels[1]" [(ngModel)]="currentPriorityLevel">Średni
+          <input type="radio" class="form-check-input m-2" id="hightPriority" name="priority" [value]="priorityLevels[2]" [(ngModel)]="currentPriorityLevel" checked>Wysoki
         </div>
 
         <div class="">

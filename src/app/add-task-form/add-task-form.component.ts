@@ -21,7 +21,8 @@ export class AddTaskFormComponent {
     deadlineDate: new Date(),
   };
 
-  priorityLevel: Number = 1;
+  priorityLevels: Array<string> = ['Niski', 'Średni', 'Wysoki'];
+  currentPriorityLevel: string = 'Wysoki';
   timeCount: number = 1;
   timeOptions: Array<string> = ['godziny', 'dni', 'tygodnie', 'miesiące'];
   currentTimeOption: string = 'godziny';
@@ -45,17 +46,17 @@ export class AddTaskFormComponent {
   }
 
   setPriorityLevel(value: any) {
-    this.priorityLevel = value.target.value;
+    this.currentPriorityLevel = value.target.value;
 
-    if (this.priorityLevel == 1) {
+    if (this.currentPriorityLevel == 'Niski') {
       this.newTask.priority = 'Niski';
-    } else if (this.priorityLevel == 2) {
+    } else if (this.currentPriorityLevel == 'Średni') {
       this.newTask.priority = 'Średni';
     } else {
       this.newTask.priority = 'Wysoki';
     }
 
-    console.log('Changed ' + this.priorityLevel);
+    console.log('Changed ' + this.currentPriorityLevel);
     console.log('Select option: ' + this.currentTimeOption);
   }
 
@@ -122,6 +123,7 @@ export class AddTaskFormComponent {
   }
 
   setTask() {
+    this.newTask.priority = this.currentPriorityLevel;
     this.newTask.addTaskDate = new Date();
     this.setTimeCount();
     this.addNewTask();
