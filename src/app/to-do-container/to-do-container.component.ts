@@ -9,6 +9,7 @@ import { TasksService } from '../services/tasks.service';
 })
 export class ToDoContainerComponent {
   tasks: Array<Task> = [];
+  isEditingTask: boolean = false;
 
   constructor(private tasksService: TasksService) {}
 
@@ -16,5 +17,10 @@ export class ToDoContainerComponent {
     this.tasksService.getTasks().subscribe((data) => {
       this.tasks = data;
     });
+
+    this.tasksService.getEditingTaskState().subscribe((data) => {
+      this.isEditingTask = data;
+    });
+
   }
 }

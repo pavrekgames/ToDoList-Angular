@@ -57,7 +57,7 @@ export class TaskElementComponent {
   }
 
   editTask() {
-    this.tasksService.changeEditingTaskState();
+    this.tasksService.startEditTask(this.task.id);
 
     console.log('Task id: ' + this.task.id);
   }

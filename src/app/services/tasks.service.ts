@@ -12,6 +12,17 @@ export class TasksService {
   private isEditingTask: boolean = false;
   private editingTaskState = new Subject<boolean>();
 
+  private taskObs = new Subject<Task>();
+
+  private selectedTask: Task = {
+    id: 1,
+    taskName: '',
+    taskDescription: '',
+    priority: '',
+    addTaskDate: new Date(),
+    deadlineDate: new Date(),
+  };
+
   private tasks: Array<Task> = new Array();
   private tasksObs = new Subject<Array<Task>>();
 
@@ -61,8 +72,17 @@ export class TasksService {
     this.tasksObs.next(this.tasks);
   }
 
+  startEditTask(taskId: number) {
+    this.changeEditingTaskState();
+    this.taskObs.next(this.tasks[taskId-1]);
+  }
+
+  getTaskObs(): Observable<Task> {
+    return this.taskObs.asObservable();
+  }
+
   editTask(id: number, task: Task) {
-    this.tasks[id] = task;
+    this.tasks[id-1] = task;
     this.changeEditingTaskState();
     this.tasksObs.next(this.tasks);
   }
