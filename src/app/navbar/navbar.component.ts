@@ -8,9 +8,12 @@ import { TasksService } from '../services/tasks.service';
 })
 export class NavbarComponent {
   isAddingTask: boolean = false;
-  currentButtonText: string = "Nowe Zadanie";
-  addTaskText: string = "Nowe Zadanie";
-  cancelTaskText: string = "Anuluj dodawanie zadania";
+  isEditingTask: boolean = false;
+
+  currentButtonText: string = 'Nowe Zadanie';
+  addTaskText: string = 'Nowe Zadanie';
+  cancelTaskText: string = 'Anuluj dodawanie zadania';
+  cancelEditTaskText: string = 'Anuluj edycję zadania';
 
   constructor(private tasksService: TasksService) {}
 
@@ -19,18 +22,25 @@ export class NavbarComponent {
       this.isAddingTask = data;
       this.setButtonText();
     });
+
+    this.tasksService.getEditingTaskState().subscribe((data) => {
+      this.isEditingTask = data;
+    });
   }
 
   changeAddingTaskState() {
     this.tasksService.changeAddingTaskState();
   }
 
-setButtonText(){
-  if(this.isAddingTask){
-    this.currentButtonText = this.cancelTaskText;
-  }else{
-    this.currentButtonText = this.addTaskText;
+  changeEditingTaskState() {
+    this.tasksService.changeEditingTaskState();
   }
-}
 
+  setButtonText() {
+    if (this.isAddingTask) {
+      this.currentButtonText = this.cancelTaskText;
+    } else {
+      this.currentButtonText = this.addTaskText;
+    }
+  }
 }

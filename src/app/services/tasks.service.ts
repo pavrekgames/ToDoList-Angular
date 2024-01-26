@@ -9,6 +9,9 @@ export class TasksService {
   private isAddingTask: boolean = false;
   private addingTaskState = new Subject<boolean>();
 
+  private isEditingTask: boolean = false;
+  private editingTaskState = new Subject<boolean>();
+
   private tasks: Array<Task> = new Array();
   private tasksObs = new Subject<Array<Task>>();
 
@@ -24,8 +27,22 @@ export class TasksService {
     this.addingTaskState.next(this.isAddingTask);
   }
 
+  changeEditingTaskState() {
+    if (!this.isEditingTask) {
+      this.isEditingTask = true;
+    } else {
+      this.isEditingTask = false;
+    }
+
+    this.editingTaskState.next(this.isEditingTask);
+  }
+
   getAddingTaskState(): Observable<boolean> {
     return this.addingTaskState.asObservable();
+  }
+
+  getEditingTaskState(): Observable<boolean> {
+    return this.editingTaskState.asObservable();
   }
 
   getTasks(): Observable<Array<Task>> {
@@ -41,6 +58,12 @@ export class TasksService {
 
   removeTask(task: Task) {
     this.tasks = this.tasks.filter((e) => e !== task);
+    this.tasksObs.next(this.tasks);
+  }
+
+  editTask(id: number, task: Task) {
+    this.tasks[id] = task;
+    this.changeEditingTaskState();
     this.tasksObs.next(this.tasks);
   }
 }

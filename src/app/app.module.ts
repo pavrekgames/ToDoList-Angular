@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToDoContainerComponent } from './to-do-container/to-do-container.component';
 import { TaskDirective } from './directives/task.directive';
 import { TaskElementComponent } from './task-element/task-element.component';
+import { EditTaskFormComponent } from './directives/edit-task-form/edit-task-form.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { TaskElementComponent } from './task-element/task-element.component';
     AddTaskFormComponent,
     ToDoContainerComponent,
     TaskDirective,
-    TaskElementComponent
+    TaskElementComponent,
+    EditTaskFormComponent
   ],
   imports: [
     BrowserModule,

@@ -26,6 +26,7 @@ export class TaskElementComponent {
 
   @Input()
   task: Task = {
+    id: 1,
     taskName: 'Default',
     taskDescription: 'kapa',
     priority: 'Wysoki',
@@ -52,6 +53,12 @@ export class TaskElementComponent {
   removeTask() {
     this.tasksService.removeTask(this.task);
 
-    console.log("Remove Task");
+    console.log('Remove Task');
+  }
+
+  editTask() {
+    this.tasksService.changeEditingTaskState();
+
+    console.log('Task id: ' + this.task.id);
   }
 }
