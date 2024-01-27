@@ -11,6 +11,7 @@ import { TaskDirective } from './directives/task.directive';
 import { TaskElementComponent } from './task-element/task-element.component';
 import { EditTaskFormComponent } from './directives/edit-task-form/edit-task-form.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +20,7 @@ import { EditTaskFormComponent } from './directives/edit-task-form/edit-task-for
     ToDoContainerComponent,
     TaskDirective,
     TaskElementComponent,
-    EditTaskFormComponent
+    EditTaskFormComponent,
   ],
   imports: [
     BrowserModule,
