@@ -64,7 +64,7 @@ export class TasksService {
 
   addTask(task: Task) {
     task.id = this.tasks.length + 1;
-    this.tasks.push(Object.assign({}, task));
+    this.tasks.push({...task}); //Object.assign({},
     this.changeAddingTaskState();
     this.tasksObs.next(this.tasks);
   }
