@@ -14,6 +14,7 @@ export class TasksService {
 
   private taskObs = new Subject<Task>();
 
+
   private selectedTask: Task = {
     id: 1,
     taskName: '',
@@ -26,7 +27,12 @@ export class TasksService {
   };
 
   private tasks: Array<Task> = new Array();
+  private toDoTasks: Array<Task> = new Array();
+  private progressTasks: Array<Task> = new Array();
+  private doneTasks: Array<Task> = new Array();
+
   private tasksObs = new Subject<Array<Task>>();
+  private toDoTasksObs = new Subject<Array<Task>>();
 
   constructor() {}
 
@@ -62,11 +68,18 @@ export class TasksService {
     return this.tasksObs.asObservable();
   }
 
+  getToDoTasks(): Observable<Array<Task>> {
+    return this.toDoTasksObs.asObservable();
+  }
+
   addTask(task: Task) {
     task.id = this.tasks.length + 1;
     this.tasks.push({...task}); //Object.assign({},
-    this.changeAddingTaskState();
+    this.toDoTasks.push({...task});
     this.tasksObs.next(this.tasks);
+    this.toDoTasksObs.next(this.toDoTasks);
+    this.changeAddingTaskState();
+
   }
 
   removeTask(task: Task) {

@@ -1,25 +1,27 @@
 
-<div class="cantainer m-4" *ngIf="tasks.length > 0 && !isEditingTask">
- <div class="row">
-    <div class="col-4 border bg-gradient to-do-color rounded ">
+<div class="cantainer m-4" *ngIf="allTasks.length > 0 && !isEditingTask" > <!-- -->
+ <div class="row" cdkDropListGroup>
+    <div class="col-4 border bg-gradient to-do-color rounded " cdkDropList [cdkDropListData]="toDotasks" (cdkDropListDropped)="drop($event)">
           <h1 class="text-center">To-Do</h1>
-          <div class="task-element border border-secondary m5 container" appTask *ngFor="let task of tasks">
+          <div class="task-element border border-secondary m5 container" appTask cdkDrag *ngFor="let task of toDotasks">
 
               <app-task-element [task]="task"></app-task-element>
           </div> <br>
     </div>
 
-    <div class="col-4 border bg-gradient in-progress-color rounded ">
+    <div class="col-4 border bg-gradient in-progress-color rounded " cdkDropList [cdkDropListData]="progressTasks" (cdkDropListDropped)="drop($event)">
           <h1 class="text-center">In Progress</h1>
-          <div class="task-element border border-secondary m5 container">
+          <div class="task-element border border-secondary m5 container" appTask cdkDrag *ngFor="let task of progressTasks">
 
+            <app-task-element [task]="task"></app-task-element>
           </div> <br>
     </div>
 
-    <div class="col-4 border bg-gradient done-color rounded ">
+    <div class="col-4 border bg-gradient done-color rounded " cdkDropList [cdkDropListData]="doneTasks" (cdkDropListDropped)="drop($event)">
       <h1 class="text-center">Done</h1>
-      <div class="task-element border border-secondary m5 container">
+      <div class="task-element border border-secondary m5 container" appTask cdkDrag *ngFor="let task of doneTasks">
 
+        <app-task-element [task]="task"></app-task-element>
       </div> <br>
 </div>
 
