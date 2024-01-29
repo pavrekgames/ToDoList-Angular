@@ -2,3 +2,11 @@
   inline-size: 350px;
   overflow-wrap: break-word;
 }
+
+.arrow-color{
+  background-color: #adb5bd;
+}
+
+.settings-color{
+  background-color: #e4c1f9;
+}
