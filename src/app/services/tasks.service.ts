@@ -71,9 +71,24 @@ export class TasksService {
     return this.toDoTasksObs.asObservable();
   }
 
+  updateTasksLists(
+    toDoArray: Array<Task>,
+    progressArray: Array<Task>,
+    doneArray: Array<Task>
+  ) {
+    this.toDoTasks = toDoArray;
+    this.progressTasks = progressArray;
+    this.doneTasks = doneArray;
+
+    this.tasks = [];
+    console.log(this.progressTasks);
+    this.tasks = this.tasks.concat(this.toDoTasks, this.progressTasks, this.doneTasks);
+    console.log(this.tasks);
+  }
+
   addTask(task: Task) {
     task.id = this.tasks.length + 1;
-    this.tasks.push(Object.assign({}, task) ); //Object.assign({}, { ...task}
+    this.tasks.push(Object.assign({}, task)); //Object.assign({}, { ...task}
     this.toDoTasks.push(Object.assign({}, task));
     this.tasksObs.next(this.tasks);
     this.toDoTasksObs.next(this.toDoTasks);
@@ -84,9 +99,13 @@ export class TasksService {
 
   removeTask(task: Task) {
     console.log(task);
-    console.log(this.tasks);
 
-    this.tasks = this.tasks.filter((e) => e !== task);
+    this.toDoTasks = this.tasks.filter((e) => e.id !== task.id);
+    this.progressTasks = this.tasks.filter((e) => e.id !== task.id);
+    this.doneTasks = this.tasks.filter((e) => e.id !== task.id);
+
+    this.tasks = [];
+    this.tasks = this.tasks.concat(this.toDoTasks, this.progressTasks, this.doneTasks);
     this.tasksObs.next(this.tasks);
 
     console.log(this.tasks);

@@ -21,7 +21,7 @@ export class ToDoContainerComponent {
     this.tasksService.getTasks().subscribe((data) => {
       this.allTasks = data;
 
-      console.log(this.allTasks);
+      //console.log(this.allTasks);
     });
 
     this.tasksService.getToDoTasks().subscribe((data) => {
@@ -33,13 +33,43 @@ export class ToDoContainerComponent {
     });
   }
 
-  drop(event: CdkDragDrop<Task[]>) {
+  dropToDo(event: CdkDragDrop<Task[]>) {
     transferArrayItem(
       event.previousContainer.data,
       event.container.data,
       event.previousIndex,
       event.currentIndex
     );
+
+    this.toDotasks = event.container.data
+
+    this.tasksService.updateTasksLists(this.toDotasks, this.progressTasks, this.doneTasks);
+  }
+
+  dropInProgress(event: CdkDragDrop<Task[]>) {
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
+
+    this.progressTasks = event.container.data
+
+    this.tasksService.updateTasksLists(this.toDotasks, this.progressTasks, this.doneTasks);
+  }
+
+  dropDone(event: CdkDragDrop<Task[]>) {
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
+
+    this.doneTasks = event.container.data
+
+    this.tasksService.updateTasksLists(this.toDotasks, this.progressTasks, this.doneTasks);
   }
 
   removeTask(task: Task) {
