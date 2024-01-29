@@ -13,7 +13,7 @@
         <span *ngIf="taskToEdit.taskName.trim().length == 0"
         class="form-check text-danger">Zadanie musi posiadać tytuł</span>
         <span *ngIf="taskToEdit.taskName.trim().length > 90"
-        class="form-check text-danger">Tytuł zadania jest za długi. Więcej informacji zawrzyj w opisie</span>
+        class="form-check text-danger">Tytuł zadania jest za długi. Więcej informacji umieść w opisie</span>
 
         <label for="task-desc" class="form-label m-2">Opis zadania:</label>
         <textarea class="form-control" id="task-desc" rows="3" [(ngModel)]="taskToEdit.taskDescription"></textarea>

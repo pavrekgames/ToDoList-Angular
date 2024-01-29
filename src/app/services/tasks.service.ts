@@ -6,8 +6,12 @@ import { Task } from '../models/task';
   providedIn: 'root',
 })
 export class TasksService {
+  private taskId: number = 0;
 
-private taskId: number = 0;
+  private toDoTasksCount = 0;
+  private toDoCountObs = new Subject<number>();
+  private allTasksCount = 0;
+  private allTasksCountObs = new Subject<number>();
 
   private isAddingTask: boolean = false;
   private addingTaskState = new Subject<boolean>();
@@ -58,6 +62,78 @@ private taskId: number = 0;
     this.editingTaskState.next(this.isEditingTask);
   }
 
+
+  updateTasksLists(
+    toDoArray: Array<Task>,
+    progressArray: Array<Task>,
+    doneArray: Array<Task>
+  ) {
+    this.toDoTasks = toDoArray;
+    this.progressTasks = progressArray;
+    this.doneTasks = doneArray;
+
+    this.setTasksList();
+    this.calculateProgress();
+  }
+
+  addTask(task: Task) {
+    this.taskId++;
+    task.id = this.taskId;
+    this.tasks.push(Object.assign({}, task)); //Object.assign({}, { ...task}
+    this.toDoTasks.push(Object.assign({}, task));
+    this.tasksObs.next(this.tasks);
+    this.toDoTasksObs.next(this.toDoTasks);
+    this.changeAddingTaskState();
+
+    this.setTasksList();
+    this.calculateProgress();
+  }
+
+  removeTask(task: Task) {
+    console.log(task);
+
+    this.toDoTasks = this.tasks.filter((e) => e.id !== task.id);
+    this.progressTasks = this.tasks.filter((e) => e.id !== task.id);
+    this.doneTasks = this.tasks.filter((e) => e.id !== task.id);
+
+    this.setTasksList();
+    this.calculateProgress();
+    this.tasksObs.next(this.tasks);
+
+    console.log(this.tasks);
+  }
+
+  startEditTask(taskId: number) {
+    this.changeEditingTaskState();
+    this.taskObs.next(this.tasks[taskId - 1]);
+  }
+
+  editTask(id: number, task: Task) {
+    this.tasks[id - 1] = task;
+    this.changeEditingTaskState();
+    this.tasksObs.next(this.tasks);
+  }
+
+  setTasksList() {
+    this.tasks = [];
+    this.tasks = this.tasks.concat(
+      this.toDoTasks,
+      this.progressTasks,
+      this.doneTasks
+    );
+  }
+
+  calculateProgress() {
+    this.toDoTasksCount = this.doneTasks.length;
+    this.allTasksCount = this.toDoTasks.length + this.progressTasks.length + this.doneTasks.length;
+    this.toDoCountObs.next(this.toDoTasksCount);
+    this.allTasksCountObs.next(this.allTasksCount);
+  }
+
+  getTaskObs(): Observable<Task> {
+    return this.taskObs.asObservable();
+  }
+
   getAddingTaskState(): Observable<boolean> {
     return this.addingTaskState.asObservable();
   }
@@ -74,61 +150,12 @@ private taskId: number = 0;
     return this.toDoTasksObs.asObservable();
   }
 
-  updateTasksLists(
-    toDoArray: Array<Task>,
-    progressArray: Array<Task>,
-    doneArray: Array<Task>
-  ) {
-    this.toDoTasks = toDoArray;
-    this.progressTasks = progressArray;
-    this.doneTasks = doneArray;
-
-    this.tasks = [];
-    console.log(this.progressTasks);
-    this.tasks = this.tasks.concat(this.toDoTasks, this.progressTasks, this.doneTasks);
-    console.log(this.tasks);
+  getToDoCount(): Observable<number> {
+    return this.toDoCountObs.asObservable();
   }
 
-  addTask(task: Task) {
-    this.taskId++;
-    task.id = this.taskId;
-    this.tasks.push(Object.assign({}, task)); //Object.assign({}, { ...task}
-    this.toDoTasks.push(Object.assign({}, task));
-    this.tasksObs.next(this.tasks);
-    this.toDoTasksObs.next(this.toDoTasks);
-    this.changeAddingTaskState();
-
-    this.tasks = [];
-    this.tasks = this.tasks.concat(this.toDoTasks, this.progressTasks, this.doneTasks);
-    console.log(this.tasks);
+  getAllTasksCount(): Observable<number> {
+    return this.allTasksCountObs.asObservable();
   }
 
-  removeTask(task: Task) {
-    console.log(task);
-
-    this.toDoTasks = this.tasks.filter((e) => e.id !== task.id);
-    this.progressTasks = this.tasks.filter((e) => e.id !== task.id);
-    this.doneTasks = this.tasks.filter((e) => e.id !== task.id);
-
-    this.tasks = [];
-    this.tasks = this.tasks.concat(this.toDoTasks, this.progressTasks, this.doneTasks);
-    this.tasksObs.next(this.tasks);
-
-    console.log(this.tasks);
-  }
-
-  startEditTask(taskId: number) {
-    this.changeEditingTaskState();
-    this.taskObs.next(this.tasks[taskId - 1]);
-  }
-
-  getTaskObs(): Observable<Task> {
-    return this.taskObs.asObservable();
-  }
-
-  editTask(id: number, task: Task) {
-    this.tasks[id - 1] = task;
-    this.changeEditingTaskState();
-    this.tasksObs.next(this.tasks);
-  }
 }
