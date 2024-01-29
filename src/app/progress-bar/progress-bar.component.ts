@@ -10,6 +10,8 @@ export class ProgressBarComponent {
   doneTasksCount: number = 0;
   allTasksCount: number = 0;
 
+  isEditingTask: boolean = false;
+
   constructor(private tasksService: TasksService) {}
 
   ngOnInit(): void {
@@ -19,6 +21,10 @@ export class ProgressBarComponent {
 
     this.tasksService.getAllTasksCount().subscribe((data) => {
       this.allTasksCount = data;
+    });
+
+    this.tasksService.getAddingTaskState().subscribe((data) => {
+      this.isEditingTask = data;
     });
   }
 }

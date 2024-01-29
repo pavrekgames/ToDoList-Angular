@@ -1,9 +1,9 @@
-<div class="m-4" *ngIf="allTasksCount > 0">
+<div class="m-4" *ngIf="allTasksCount > 0 && !isEditingTask">
  <!--<h1 class="badge rounded-pill bg-success">Postęp</h1>-->
  <h2><span class="badge rounded-pill bg-dark">Postęp</span></h2>
 </div>
 
-<div class="progress m-4" *ngIf="allTasksCount > 0">
+<div class="progress m-4" *ngIf="allTasksCount > 0 && !isEditingTask">
 
   <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [ngStyle]="{width:doneTasksCount/allTasksCount | percent:'1.0-1'}"
   [attr.aria-valuenow]="doneTasksCount" aria-valuemin="0" aria-valuemax="100">
