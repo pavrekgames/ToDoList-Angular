@@ -6,6 +6,9 @@ import { Task } from '../models/task';
   providedIn: 'root',
 })
 export class TasksService {
+
+private taskId: number = 0;
+
   private isAddingTask: boolean = false;
   private addingTaskState = new Subject<boolean>();
 
@@ -87,13 +90,16 @@ export class TasksService {
   }
 
   addTask(task: Task) {
-    task.id = this.tasks.length + 1;
+    this.taskId++;
+    task.id = this.taskId;
     this.tasks.push(Object.assign({}, task)); //Object.assign({}, { ...task}
     this.toDoTasks.push(Object.assign({}, task));
     this.tasksObs.next(this.tasks);
     this.toDoTasksObs.next(this.toDoTasks);
     this.changeAddingTaskState();
 
+    this.tasks = [];
+    this.tasks = this.tasks.concat(this.toDoTasks, this.progressTasks, this.doneTasks);
     console.log(this.tasks);
   }
 
