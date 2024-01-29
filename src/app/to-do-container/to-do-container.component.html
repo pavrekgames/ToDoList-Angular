@@ -5,7 +5,7 @@
           <h1 class="text-center">To-Do</h1>
           <div class="task-element border border-secondary m5 container" appTask cdkDrag *ngFor="let task of toDotasks">
 
-              <app-task-element [task]="task"></app-task-element>
+              <app-task-element [task]="task" (eventTask)="removeTask(task)"></app-task-element>
           </div> <br>
     </div>
 
@@ -13,7 +13,7 @@
           <h1 class="text-center">In Progress</h1>
           <div class="task-element border border-secondary m5 container" appTask cdkDrag *ngFor="let task of progressTasks">
 
-            <app-task-element [task]="task"></app-task-element>
+            <app-task-element [task]="task" (eventTask)="removeTask(task)"></app-task-element>
           </div> <br>
     </div>
 
@@ -21,7 +21,7 @@
       <h1 class="text-center">Done</h1>
       <div class="task-element border border-secondary m5 container" appTask cdkDrag *ngFor="let task of doneTasks">
 
-        <app-task-element [task]="task"></app-task-element>
+        <app-task-element [task]="task" (eventTask)="removeTask(task)"></app-task-element>
       </div> <br>
 </div>
 

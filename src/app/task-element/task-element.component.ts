@@ -1,4 +1,11 @@
-import { Component, Input, ElementRef, Renderer2 } from '@angular/core';
+import {
+  Component,
+  Input,
+  ElementRef,
+  Renderer2,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { Task } from '../models/task';
 import { TaskDirective } from '../directives/task.directive';
 import { TasksService } from '../services/tasks.service';
@@ -36,6 +43,9 @@ export class TaskElementComponent {
     deadlineDate: new Date(),
   };
 
+  @Output()
+  eventTask = new EventEmitter<Task>();
+
   tasksDetails() {
     if (this.isDetailsHidden) {
       this.isDetailsHidden = false;
@@ -54,6 +64,7 @@ export class TaskElementComponent {
 
   removeTask() {
     this.tasksService.removeTask(this.task);
+    this.eventTask.emit(this.task);
 
     console.log('Remove Task');
   }

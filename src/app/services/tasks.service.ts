@@ -14,7 +14,6 @@ export class TasksService {
 
   private taskObs = new Subject<Task>();
 
-
   private selectedTask: Task = {
     id: 1,
     taskName: '',
@@ -74,22 +73,28 @@ export class TasksService {
 
   addTask(task: Task) {
     task.id = this.tasks.length + 1;
-    this.tasks.push({...task}); //Object.assign({},
-    this.toDoTasks.push({...task});
+    this.tasks.push(Object.assign({}, task) ); //Object.assign({}, { ...task}
+    this.toDoTasks.push(Object.assign({}, task));
     this.tasksObs.next(this.tasks);
     this.toDoTasksObs.next(this.toDoTasks);
     this.changeAddingTaskState();
 
+    console.log(this.tasks);
   }
 
   removeTask(task: Task) {
+    console.log(task);
+    console.log(this.tasks);
+
     this.tasks = this.tasks.filter((e) => e !== task);
     this.tasksObs.next(this.tasks);
+
+    console.log(this.tasks);
   }
 
   startEditTask(taskId: number) {
     this.changeEditingTaskState();
-    this.taskObs.next(this.tasks[taskId-1]);
+    this.taskObs.next(this.tasks[taskId - 1]);
   }
 
   getTaskObs(): Observable<Task> {
@@ -97,7 +102,7 @@ export class TasksService {
   }
 
   editTask(id: number, task: Task) {
-    this.tasks[id-1] = task;
+    this.tasks[id - 1] = task;
     this.changeEditingTaskState();
     this.tasksObs.next(this.tasks);
   }

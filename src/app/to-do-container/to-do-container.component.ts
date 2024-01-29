@@ -20,6 +20,8 @@ export class ToDoContainerComponent {
   ngOnInit(): void {
     this.tasksService.getTasks().subscribe((data) => {
       this.allTasks = data;
+
+      console.log(this.allTasks);
     });
 
     this.tasksService.getToDoTasks().subscribe((data) => {
@@ -38,5 +40,13 @@ export class ToDoContainerComponent {
       event.previousIndex,
       event.currentIndex
     );
+  }
+
+  removeTask(task: Task) {
+    this.toDotasks = this.toDotasks.filter((e) => e !== task);
+    this.progressTasks = this.progressTasks.filter((e) => e !== task);
+    this.doneTasks = this.doneTasks.filter((e) => e !== task);
+    //this.allTasks = this.allTasks.filter((e) => e !== task);
+
   }
 }
