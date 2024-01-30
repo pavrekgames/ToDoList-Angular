@@ -1,11 +1,4 @@
-import {
-  Component,
-  Input,
-  ElementRef,
-  Renderer2,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from '../models/task';
 import { TaskDirective } from '../directives/task.directive';
 import { TasksService } from '../services/tasks.service';
@@ -15,6 +8,7 @@ import { TasksService } from '../services/tasks.service';
   templateUrl: './task-element.component.html',
   styleUrl: './task-element.component.css',
 })
+
 export class TaskElementComponent {
   isDetailsHidden: boolean = true;
   isSettingsHidden: boolean = true;
@@ -65,13 +59,9 @@ export class TaskElementComponent {
   removeTask() {
     this.tasksService.removeTask(this.task);
     this.eventTask.emit(this.task);
-
-    console.log('Remove Task');
   }
 
   editTask() {
     this.tasksService.startEditTask(this.task.id);
-
-    console.log('Task id: ' + this.task.id);
   }
 }

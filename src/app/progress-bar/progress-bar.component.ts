@@ -6,6 +6,7 @@ import { TasksService } from '../services/tasks.service';
   templateUrl: './progress-bar.component.html',
   styleUrl: './progress-bar.component.css',
 })
+
 export class ProgressBarComponent {
   doneTasksCount: number = 0;
   allTasksCount: number = 0;

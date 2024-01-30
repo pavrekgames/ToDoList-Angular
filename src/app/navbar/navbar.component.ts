@@ -6,6 +6,7 @@ import { TasksService } from '../services/tasks.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
+
 export class NavbarComponent {
   isAddingTask: boolean = false;
   isEditingTask: boolean = false;

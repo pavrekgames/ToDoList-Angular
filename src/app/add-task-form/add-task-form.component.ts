@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { TasksService } from '../services/tasks.service';
-import { Console } from 'console';
-import { TaskPriorityLevel, Task } from '../models/task';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Task } from '../models/task';
 
 @Component({
   selector: 'app-add-task-form',
@@ -34,32 +32,12 @@ export class AddTaskFormComponent {
   isFormValid: boolean =
     this.newTask.taskName.trim().length > 0 && this.timeCount > 0;
 
-  constructor(
-    private tasksService: TasksService,
-    private formBuilder: FormBuilder
-  ) {}
+  constructor(private tasksService: TasksService) {}
 
   ngOnInit(): void {
     this.tasksService.getAddingTaskState().subscribe((data) => {
       this.isAddingTask = data;
     });
-
-    this.newTask.taskName = '';
-  }
-
-  setPriorityLevel(value: any) {
-    this.currentPriorityLevel = value.target.value;
-
-    if (this.currentPriorityLevel == 'Niski') {
-      this.newTask.priority = 'Niski';
-    } else if (this.currentPriorityLevel == 'Średni') {
-      this.newTask.priority = 'Średni';
-    } else {
-      this.newTask.priority = 'Wysoki';
-    }
-
-    console.log('Changed ' + this.currentPriorityLevel);
-    console.log('Select option: ' + this.currentTimeOption);
   }
 
   setDeadlineDate() {
@@ -81,7 +59,8 @@ export class AddTaskFormComponent {
 
   addHoursToDate(): Date {
     this.deadlineDate.setTime(
-      this.newTask.addTaskDate.getTime() + this.newTask.timeCount * 60 * 60 * 1000
+      this.newTask.addTaskDate.getTime() +
+        this.newTask.timeCount * 60 * 60 * 1000
     );
 
     return this.deadlineDate;
@@ -89,7 +68,8 @@ export class AddTaskFormComponent {
 
   addDaysToDate(): Date {
     this.deadlineDate.setTime(
-      this.newTask.addTaskDate.getTime() + this.newTask.timeCount * 60 * 60 * 1000 * 24
+      this.newTask.addTaskDate.getTime() +
+        this.newTask.timeCount * 60 * 60 * 1000 * 24
     );
 
     return this.deadlineDate;
@@ -98,7 +78,7 @@ export class AddTaskFormComponent {
   addWeeksToDate(): Date {
     this.deadlineDate.setTime(
       this.newTask.addTaskDate.getTime() +
-      this.newTask.timeCount * 60 * 60 * 1000 * 24 * 7
+        this.newTask.timeCount * 60 * 60 * 1000 * 24 * 7
     );
 
     return this.deadlineDate;
@@ -116,18 +96,17 @@ export class AddTaskFormComponent {
 
   onSubmit() {
     this.isFormValid =
-      this.newTask.taskName.trim().length > 0 && this.newTask.taskName.trim().length <= 90 && this.timeCount > 0;
+      this.newTask.taskName.trim().length > 0 &&
+      this.newTask.taskName.trim().length <= 90 &&
+      this.timeCount > 0;
 
     if (this.isFormValid) {
-      console.log('Submitted');
       this.setTask();
     }
   }
 
   setTask() {
     this.newTask.priority = this.currentPriorityLevel;
-    //this.newTask.timeCount = this.timeCount;
-    //this.newTask.timeUnit = this.currentTimeOption;
     this.newTask.addTaskDate = new Date();
     this.setDeadlineDate();
     this.addNewTask();

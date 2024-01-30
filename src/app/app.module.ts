@@ -10,8 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToDoContainerComponent } from './to-do-container/to-do-container.component';
 import { TaskDirective } from './directives/task.directive';
 import { TaskElementComponent } from './task-element/task-element.component';
-import { EditTaskFormComponent } from './directives/edit-task-form/edit-task-form.component';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
+import { EditTaskFormComponent } from './edit-task-form/edit-task-form.component';
 
 
 @NgModule({

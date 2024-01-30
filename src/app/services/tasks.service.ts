@@ -21,17 +21,6 @@ export class TasksService {
 
   private taskObs = new Subject<Task>();
 
-  private selectedTask: Task = {
-    id: 1,
-    taskName: '',
-    taskDescription: '',
-    priority: '',
-    timeCount: 1,
-    timeUnit: '',
-    addTaskDate: new Date(),
-    deadlineDate: new Date(),
-  };
-
   private tasks: Array<Task> = new Array();
   private toDoTasks: Array<Task> = new Array();
   private progressTasks: Array<Task> = new Array();
@@ -62,7 +51,6 @@ export class TasksService {
     this.editingTaskState.next(this.isEditingTask);
   }
 
-
   updateTasksLists(
     toDoArray: Array<Task>,
     progressArray: Array<Task>,
@@ -79,7 +67,7 @@ export class TasksService {
   addTask(task: Task) {
     this.taskId++;
     task.id = this.taskId;
-    this.tasks.push(Object.assign({}, task)); //Object.assign({}, { ...task}
+    this.tasks.push(Object.assign({}, task));
     this.toDoTasks.push(Object.assign({}, task));
     this.tasksObs.next(this.tasks);
     this.toDoTasksObs.next(this.toDoTasks);
@@ -90,8 +78,6 @@ export class TasksService {
   }
 
   removeTask(task: Task) {
-    console.log(task);
-
     this.toDoTasks = this.tasks.filter((e) => e.id !== task.id);
     this.progressTasks = this.tasks.filter((e) => e.id !== task.id);
     this.doneTasks = this.tasks.filter((e) => e.id !== task.id);
@@ -99,8 +85,6 @@ export class TasksService {
     this.setTasksList();
     this.calculateProgress();
     this.tasksObs.next(this.tasks);
-
-    console.log(this.tasks);
   }
 
   startEditTask(taskId: number) {
@@ -125,7 +109,8 @@ export class TasksService {
 
   calculateProgress() {
     this.toDoTasksCount = this.doneTasks.length;
-    this.allTasksCount = this.toDoTasks.length + this.progressTasks.length + this.doneTasks.length;
+    this.allTasksCount =
+      this.toDoTasks.length + this.progressTasks.length + this.doneTasks.length;
     this.toDoCountObs.next(this.toDoTasksCount);
     this.allTasksCountObs.next(this.allTasksCount);
   }
@@ -157,5 +142,4 @@ export class TasksService {
   getAllTasksCount(): Observable<number> {
     return this.allTasksCountObs.asObservable();
   }
-
 }

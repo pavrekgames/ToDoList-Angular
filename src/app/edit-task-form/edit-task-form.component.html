@@ -9,7 +9,7 @@
     <div class="col-lg-5">
 
         <label for="task-title" class="form-label m-2">Tytuł zadania:</label>
-        <input type="text" class="form-control" id="task-title" placeholder="Zadanie 1" name="task-title" [(ngModel)]="taskToEdit.taskName" > <!--[ngModelOptions]="{standalone: true}"-->
+        <input type="text" class="form-control" id="task-title" placeholder="Zadanie 1" name="task-title" [(ngModel)]="taskToEdit.taskName">
         <span *ngIf="taskToEdit.taskName.trim().length == 0"
         class="form-check text-danger">Zadanie musi posiadać tytuł</span>
         <span *ngIf="taskToEdit.taskName.trim().length > 90"
@@ -40,7 +40,6 @@
         <div class="text-center m-4">
           <button type="button" class="btn btn-info" (click)="onSubmit()">Edytuj zadanie</button>
         </div>
-
 
     </div>
   </div>

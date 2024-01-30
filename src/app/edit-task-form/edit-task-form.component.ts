@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { Console } from 'console';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { TasksService } from '../../services/tasks.service';
-import { Task } from '../../models/task';
+import { Task } from '../models/task';
+import { TasksService } from '../services/tasks.service';
 
 @Component({
   selector: 'app-edit-task-form',
   templateUrl: './edit-task-form.component.html',
-  styleUrl: './edit-task-form.component.css'
+  styleUrl: './edit-task-form.component.css',
 })
-export class EditTaskFormComponent {
 
+export class EditTaskFormComponent {
   isEditingTask: boolean = false;
 
   taskToEdit: Task = {
@@ -35,10 +35,7 @@ export class EditTaskFormComponent {
   isFormValid: boolean =
     this.taskToEdit.taskName.trim().length > 0 && this.timeCount > 0;
 
-  constructor(
-    private tasksService: TasksService,
-    private formBuilder: FormBuilder
-  ) {}
+  constructor(private tasksService: TasksService) {}
 
   ngOnInit(): void {
     this.tasksService.getEditingTaskState().subscribe((data) => {
@@ -49,23 +46,6 @@ export class EditTaskFormComponent {
       this.taskToEdit = data;
       this.currentPriorityLevel = this.taskToEdit.priority;
     });
-
-    this.taskToEdit.taskName = '';
-  }
-
-  setPriorityLevel(value: any) {
-    this.currentPriorityLevel = value.target.value;
-
-    if (this.currentPriorityLevel == 'Niski') {
-      this.taskToEdit.priority = 'Niski';
-    } else if (this.currentPriorityLevel == 'Średni') {
-      this.taskToEdit.priority = 'Średni';
-    } else {
-      this.taskToEdit.priority = 'Wysoki';
-    }
-
-    console.log('Changed ' + this.currentPriorityLevel);
-    console.log('Select option: ' + this.currentTimeOption);
   }
 
   setDeadlineDate() {
@@ -87,7 +67,8 @@ export class EditTaskFormComponent {
 
   addHoursToDate(): Date {
     this.deadlineDate.setTime(
-      this.taskToEdit.addTaskDate.getTime() + this.taskToEdit.timeCount * 60 * 60 * 1000
+      this.taskToEdit.addTaskDate.getTime() +
+        this.taskToEdit.timeCount * 60 * 60 * 1000
     );
 
     return this.deadlineDate;
@@ -95,7 +76,8 @@ export class EditTaskFormComponent {
 
   addDaysToDate(): Date {
     this.deadlineDate.setTime(
-      this.taskToEdit.addTaskDate.getTime() + this.taskToEdit.timeCount * 60 * 60 * 1000 * 24
+      this.taskToEdit.addTaskDate.getTime() +
+        this.taskToEdit.timeCount * 60 * 60 * 1000 * 24
     );
 
     return this.deadlineDate;
@@ -104,7 +86,7 @@ export class EditTaskFormComponent {
   addWeeksToDate(): Date {
     this.deadlineDate.setTime(
       this.taskToEdit.addTaskDate.getTime() +
-      this.taskToEdit.timeCount * 60 * 60 * 1000 * 24 * 7
+        this.taskToEdit.timeCount * 60 * 60 * 1000 * 24 * 7
     );
 
     return this.deadlineDate;
@@ -122,18 +104,17 @@ export class EditTaskFormComponent {
 
   onSubmit() {
     this.isFormValid =
-      this.taskToEdit.taskName.trim().length > 0 && this.taskToEdit.taskName.trim().length <= 90 && this.timeCount > 0;
+      this.taskToEdit.taskName.trim().length > 0 &&
+      this.taskToEdit.taskName.trim().length <= 90 &&
+      this.timeCount > 0;
 
     if (this.isFormValid) {
-      console.log('Submitted');
       this.setTask();
     }
   }
 
   setTask() {
     this.taskToEdit.priority = this.currentPriorityLevel;
-    //this.taskToEdit.timeCount = this.timeCount;
-    //this.taskToEdit.timeUnit = this.currentTimeOption;
     this.taskToEdit.addTaskDate = new Date();
     this.setDeadlineDate();
     this.editTask();
@@ -142,6 +123,4 @@ export class EditTaskFormComponent {
   editTask() {
     this.tasksService.editTask(this.taskToEdit.id, this.taskToEdit);
   }
-
-
 }
