@@ -1,6 +1,6 @@
 <div class="d-flex">
 
-  <div class="flex-grow-1 m-1 box"><b>{{task.taskName}}</b></div>
+  <div class="flex-grow-1 m-1 text-break"><b>{{task.taskName}}</b></div>
 
   <div class="m-2">
     <p class="badge bg-primary">{{task.priority}} </p>
@@ -38,7 +38,7 @@
 
 <div class="container" [hidden]="isDetailsHidden">
 
-  <div class="box border m-1">
+  <div class="text-break border border-dark m-1">
     {{task.taskDescription}}
   </div>
 
