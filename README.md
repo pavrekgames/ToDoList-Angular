@@ -1,3 +1,24 @@
+To-Do-List is a single-page application where you can add, edit, and remove tasks to do. 
+You can set descriptions, priorities, and deadlines for the tasks. 
+You can drag and drop tasks to certain tabs like To-Do, In-Progress, and Done.
+
+![ToDoListGeneral](https://github.com/pavrekgames/ToDoApp-Angular/assets/105421661/84dab238-d5f9-4eaf-85da-e7e78eefbbb3)
+
+The most important implementations:
+
+- Adding tasks with form validation
+
+![AddingTask](https://github.com/pavrekgames/ToDoApp-Angular/assets/105421661/afb98c52-3fdc-479b-96ba-b777fd40aa5d)
+
+- Editing, deleting, and dragging tasks
+
+![TaskList](https://github.com/pavrekgames/ToDoApp-Angular/assets/105421661/0f41b909-a9a6-449f-82dc-2347b49bd316)
+
+- Progress Bar
+
+![ProgressBar](https://github.com/pavrekgames/ToDoApp-Angular/assets/105421661/cf642f2e-8321-4c86-afeb-d1f32f58df82)
+
+
 # ToDoApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.10.
